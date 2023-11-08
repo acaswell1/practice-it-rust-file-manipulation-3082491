@@ -8,8 +8,26 @@ fn main() {
     ]);
 
     // Implement the get_words and replace_x_with_y_in_place functions
-    //let words = get_words(&contents);
-    //let new_words = replace_x_with_y_in_place(words.clone(), &replacement_map);
+    let words = get_words(&contents);
+    let new_words = replace_x_with_y_in_place(words.clone(), &replacement_map);
 
-    //println!("{:?}", new_words);
+    println!("{:?}", new_words);
+}
+
+fn get_words(content: &str) -> Vec<String> {
+    content
+        .split_whitespace()
+        .map(|word| word.to_string())
+        .collect()
+}
+
+fn replace_x_with_y_in_place(mut words: Vec<String>, change_map: &HashMap<String, String>) -> Vec<String>{
+    words
+        .iter_mut()
+        .for_each(|word | match change_map.get(word) {
+            Some(change_word) => *word = change_word.to_string(),
+            _ => *word = word.to_string()
+        });
+    
+    words
 }
